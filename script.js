@@ -139,6 +139,7 @@ function renderBasket() {
 		basketRef.innerHTML += getBasketItemTemplate(product, item);
 	}
 	renderInvoice();
+	renderBadge();
 }
 
 function renderInvoice() {
@@ -271,6 +272,15 @@ function counterDownAmount(index) {
 	renderBasket();
 }
 
+function renderBadge() {
+	let count = 0;
+
+	for (let i = 0; i < basket.length; i++) {
+		count = count + basket[i].amount;
+	}
+	document.getElementById("basket-badge").textContent = count;
+}
+
 // 	if (bookedItem) {
 // 		bookedItem.amount = bookedItem.amount + 1;
 // 	} else {
@@ -362,14 +372,14 @@ function counterDownAmount(index) {
 // 	document.getElementById("menu-backdrop").classList.remove("show");
 // }
 
-// function renderBadge() {
-// 	let count = 0;
+function renderBadge() {
+	let count = 0;
 
-// 	for (let i = 0; i < basket.length; i++) {
-// 		count = count + basket[i].amount;
-// 	}
-// 	document.getElementById("basket-badge").textContent = count;
-// }
+	for (let i = 0; i < basket.length; i++) {
+		count = count + basket[i].amount;
+	}
+	document.getElementById("basket-badge").textContent = count;
+}
 
 // // ------ TEMPLATES ------
 
