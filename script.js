@@ -138,6 +138,42 @@ function renderBasket() {
 		const product = products[item.index];
 		basketRef.innerHTML += getBasketItemTemplate(product, item);
 	}
+	renderInvoice();
+}
+
+function renderInvoice() {
+	let subtotal = 0;
+
+	for (let i = 0; i < basket.length; i++) {
+		const item = basket[i];
+		const product = products[item.index];
+		subtotal = subtotal + product.price * item.amount;
+	}
+	const deliveryFee = 4.99;
+	const total = subtotal + deliveryFee;
+	document.getElementById("subtotal").textContent =
+		getFormattedPrice(subtotal);
+	document.getElementById("total").textContent = getFormattedPrice(total);
+}
+
+function renderInvoice() {
+	let subtotal = 0;
+
+	for (let i = 0; i < basket.length; i++) {
+		const item = basket[i];
+
+		const product = products.find(function (p) {
+			return p.id === item.id;
+		});
+
+		subtotal = subtotal + product.price * item.amount;
+	}
+
+	const deliveryFee = 4.99;
+	const total = subtotal + deliveryFee;
+	document.getElementById("subtotal").textContent =
+		getFormattedPrice(subtotal);
+	document.getElementById("total").textContent = getFormattedPrice(total);
 }
 
 // ------ TEMPLATES ------
@@ -324,26 +360,6 @@ function counterDownAmount(index) {
 // function closeMenu() {
 // 	document.getElementById("header-menu").classList.remove("show");
 // 	document.getElementById("menu-backdrop").classList.remove("show");
-// }
-
-// function renderInvoice() {
-// 	let subtotal = 0;
-
-// 	for (let i = 0; i < basket.length; i++) {
-// 		const item = basket[i];
-
-// 		const product = products.find(function (p) {
-// 			return p.id === item.id;
-// 		});
-
-// 		subtotal = subtotal + product.price * item.amount;
-// 	}
-
-// 	const deliveryFee = 4.99;
-// 	const total = subtotal + deliveryFee;
-// 	document.getElementById("subtotal").textContent =
-// 		getFormattedPrice(subtotal);
-// 	document.getElementById("total").textContent = getFormattedPrice(total);
 // }
 
 // function renderBadge() {
