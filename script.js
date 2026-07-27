@@ -109,6 +109,7 @@ const categories = [
 
 function init() {
 	renderProducts();
+	renderBasket();
 }
 
 init();
@@ -125,6 +126,17 @@ function renderProducts() {
 				listRef.innerHTML += getProductTemplate(i);
 			}
 		}
+	}
+}
+
+function renderBasket() {
+	const basketRef = document.getElementById("basket-items");
+	basketRef.innerHTML = "";
+
+	for (let i = 0; i < basket.length; i++) {
+		const item = basket[i];
+		const product = products[item.index];
+		basketRef.innerHTML += getBasketItemTemplate(product, item);
 	}
 }
 
@@ -146,6 +158,27 @@ function getProductTemplate(i) {
 	`;
 }
 
+function getBasketItemTemplate(product, item) {
+	return /*html*/ `
+		<div class="basket-item">
+			<div class="basket-item-top">
+				<p class="basket-item-name">${product.name}</p>
+				<button onclick="removeFromBasket(${item.index})">
+					<img src="assets/icons/ic-trash.svg" alt="Entfernen" />
+				</button>
+			</div>
+			<div class="basket-item-bottom">
+				<div class="number">
+					<button onclick="counterDownAmount(${item.index})">-</button>
+					<span>${item.amount}</span>
+					<button onclick="counterUpAmount(${item.index})">+</button>
+				</div>
+				<data class="basket-item-price">${getBasketItemPrice(product, item)}</data>
+			</div>
+		</div>
+	`;
+}
+
 // ------ HELPERS ------
 
 function getFormattedPrice(price) {
@@ -153,6 +186,60 @@ function getFormattedPrice(price) {
 	const germanPrice = fixedPrice.replace(".", ",");
 	return `${germanPrice} €`;
 }
+
+function getBasketItemPrice(product, item) {
+	const totalPrice = product.price * item.amount;
+	return getFormattedPrice(totalPrice);
+}
+
+// ------ ACTIONS ------
+
+function addToBasket(index) {
+	const bookedItem = basket.find(function (item) {
+		return item.index === index;
+	});
+
+	if (bookedItem) {
+		bookedItem.amount = bookedItem.amount + 1;
+	} else {
+		basket.push({ index: index, amount: 1 });
+	}
+
+	renderBasket();
+}
+
+function removeFromBasket(index) {
+	const position = basket.findIndex(function (item) {
+		return item.index === index;
+	});
+	basket.splice(position, 1);
+	renderBasket();
+}
+
+function counterUpAmount(index) {
+	const bookedItem = basket.find(function (item) {
+		return item.index === index;
+	});
+	bookedItem.amount = bookedItem.amount + 1;
+	renderBasket();
+}
+
+function counterDownAmount(index) {
+	const bookedItem = basket.find(function (item) {
+		return item.index === index;
+	});
+
+	if (bookedItem.amount >= 2) {
+		bookedItem.amount = bookedItem.amount - 1;
+	}
+	renderBasket();
+}
+
+// 	if (bookedItem) {
+// 		bookedItem.amount = bookedItem.amount + 1;
+// 	} else {
+// 		basket.push({ id: id, amount: 1 });
+// 	}
 
 // const categories = [
 // 	{ name: "burger", ref: "tlist-burger" },
@@ -283,30 +370,6 @@ function getFormattedPrice(price) {
 // 	const fixedPrice = price.toFixed(2);
 // 	const germanPrice = fixedPrice.replace(".", ",");
 // 	return `${germanPrice} €`;
-// }
-
-// function getBasketItemPrice(product, item) {
-// 	const totalPrice = product.price * item.amount;
-// 	return getFormattedPrice(totalPrice);
-// }
-
-// function counterUpAmount(id) {
-// 	const bookedItem = basket.find(function (item) {
-// 		return item.id === id;
-// 	});
-// 	bookedItem.amount = bookedItem.amount + 1;
-// 	renderBasket();
-// }
-
-// function counterDownAmount(id) {
-// 	const bookedItem = basket.find(function (item) {
-// 		return item.id === id;
-// 	});
-
-// 	if (bookedItem.amount >= 2) {
-// 		bookedItem.amount = bookedItem.amount - 1;
-// 	}
-// 	renderBasket();
 // }
 
 // function removeFromBasket(id) {
