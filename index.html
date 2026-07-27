@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>BurgerHouse</title>
+
+		<link rel="icon" href="./assets/icons/ic-burger.svg" type="svg" />
+		<link rel="stylesheet" href="style.css" />
+
+		<script defer src="./script.js"></script>
+	</head>
+	<body>
+		<header>
+			<div class="content header-content">
+				<div class="logo">
+					<img src="assets/icons/ic-logo.svg" alt="" />
+					<span>BurgerHouse</span>
+				</div>
+				<button class="menu-toggle" onclick="openMenu()">
+					<img src="assets/icons/ic-menu.svg" alt="Menü öffnen" />
+				</button>
+			</div>
+
+			<nav class="header-menu" id="header-menu">
+				<button class="menu-close" onclick="closeMenu()">
+					<img src="assets/icons/ic-close.svg" alt="Menü schließen" />
+				</button>
+				<a href="#burger" onclick="closeMenu()">Burger</a>
+				<a href="#pizza" onclick="closeMenu()">Pizza</a>
+				<a href="#salad" onclick="closeMenu()">Salad</a>
+				<button onclick="openBasket()">Warenkorb</button>
+			</nav>
+			<div
+				class="menu-backdrop"
+				id="menu-backdrop"
+				onclick="closeMenu()"
+			></div>
+		</header>
+
+		<!-- ////// HERO ////// -->
+		<section class="hero">
+			<div class="content hero-content">
+				<img
+					class="hero-image"
+					src="assets/images/hero-image-desktop.jpg"
+					alt=""
+				/>
+				<img
+					class="hero-logo"
+					src="assets/images/logo-badge.png"
+					alt=""
+				/>
+			</div>
+		</section>
+
+		<!-- ////// RESTAURANT-INFO ////// -->
+		<section class="restaurant-info">
+			<div class="content">
+				<h1>BurgerHouse</h1>
+				<p class="rating">★ 4,1 (120)</p>
+				<p class="description">
+					The best of Burgers, Pizza, and Greens, all in one great
+					place.
+				</p>
+			</div>
+		</section>
+		<!-- ////// MENU + BASKET ////// -->
+		<div class="menu-layout">
+			<main class="menu">
+				<!-- Burger -->
+				<section class="category" id="burger">
+					<div class="category-banner">
+						<div class="content">
+							<img src="assets/icons/ic-burger.svg" alt="" />
+							<span>Burger</span>
+						</div>
+					</div>
+					<div class="content">
+						<div class="product-list" id="list-burger"></div>
+					</div>
+				</section>
+
+				<!-- Pizza -->
+				<section class="category" id="pizza">
+					<div class="category-banner">
+						<div class="content">
+							<img src="assets/icons/ic-pizza.svg" />
+							<span>Pizza</span>
+						</div>
+					</div>
+					<div class="content">
+						<div class="product-list" id="list-pizza"></div>
+					</div>
+				</section>
+
+				<!-- Salad -->
+				<section class="category" id="salad">
+					<div class="category-banner">
+						<div class="content">
+							<img src="assets/icons/ic-salat.svg" alt="" />
+							<span>Salad</span>
+						</div>
+					</div>
+					<div class="content">
+						<div class="product-list" id="list-salad"></div>
+					</div>
+				</section>
+			</main>
+
+			<!-- ////// BASKET ////// -->
+			<aside class="basket" id="basket">
+				<div class="basket-header">
+					<h2>Your Basket</h2>
+					<button class="basket-close" onclick="closeBasket()">
+						<img
+							src="assets/icons/ic-close.svg"
+							alt="Warenkorb schließen"
+						/>
+					</button>
+				</div>
+
+				<div class="basket-items" id="basket-items">
+					<!-- Warenkorb-Zeilen via JS -->
+				</div>
+
+				<div class="basket-invoice">
+					<p class="basket-subtotal">
+						<span>Subtotal</span>
+						<span id="subtotal">0,00 €</span>
+					</p>
+					<p class="basket-delivery">
+						<span>Delivery fee</span>
+						<span id="delivery-fee">4,99 €</span>
+					</p>
+					<p class="basket-total">
+						<span>Total</span>
+						<span id="total">0,00 €</span>
+					</p>
+					<button class="buy-btn" id="buy-btn" onclick="checkout()">
+						Buy now
+					</button>
+				</div>
+			</aside>
+		</div>
+
+		<!-- ////// FOOTER ////// -->
+		<footer>
+			<div class="content footer-content">
+				<ul class="footer-links">
+					<li>Imprint</li>
+					<li>Cookie Preferences</li>
+				</ul>
+				<p class="copyright">&copy; 2026 BurgerHouse</p>
+			</div>
+		</footer>
+
+		<!-- ////// BOTTOM NAV (MOBILE) ////// -->
+		<nav class="bottom-nav">
+			<button class="nav-item" onclick="">
+				<img src="assets/icons/ic-home.svg" alt="Startseite" />
+			</button>
+			<button class="nav-item" onclick="">
+				<img src="assets/icons/ic-profile.svg" alt="Profil" />
+			</button>
+			<button class="nav-item" onclick="">
+				<img src="assets/icons/ic-menu.svg" alt="Menü" />
+			</button>
+			<button class="nav-item nav-basket" onclick="openBasket()">
+				<img src="assets/icons/ic-basket.svg" alt="Warenkorb" />
+				<span class="basket-badge" id="basket-badge">0</span>
+			</button>
+		</nav>
+
+		<!-- ////// CONFIRMATION (OVERLAY) ////// -->
+		<div class="confirmation" id="confirmation">
+			<button class="confirm-close" onclick="closeConfirmation()">
+				<img src="assets/icons/ic-close.svg" alt="Schließen" />
+			</button>
+			<img src="assets/images/confirmed.png" alt="" />
+			<div class="confirm-box">
+				<h2>Order confirmed!</h2>
+				<p>Your food is on the way!</p>
+			</div>
+		</div>
+	</body>
+</html>
