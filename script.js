@@ -133,10 +133,10 @@ function renderBasket() {
 	const basketRef = document.getElementById("basket-items");
 	basketRef.innerHTML = "";
 
-	for (let i = 0; i < basket.length; i++) {
-		const item = basket[i];
-		const product = products[item.index];
-		basketRef.innerHTML += getBasketItemTemplate(product, item);
+	if (basket.length === 0) {
+		basketRef.innerHTML = getEmptyBasketTemplate();
+	} else {
+		renderBasketItems(basketRef);
 	}
 	renderInvoice();
 	renderBadge();
@@ -177,6 +177,28 @@ function renderInvoice() {
 	document.getElementById("total").textContent = getFormattedPrice(total);
 }
 
+function renderBasketItems(basketRef) {
+	for (let i = 0; i < basket.length; i++) {
+		const item = basket[i];
+		const product = products[item.index];
+		basketRef.innerHTML += getBasketItemTemplate(product, item);
+	}
+}
+
+function openBasket() {
+	document.getElementById("basket").classList.add("show");
+}
+
+function closeBasket() {
+	document.getElementById("basket").classList.remove("show");
+}
+
+function checkout() {
+	basket = [];
+	renderBasket();
+	document.getElementById("confirmation").classList.add("show");
+}
+
 // ------ TEMPLATES ------
 
 function getProductTemplate(i) {
@@ -212,6 +234,15 @@ function getBasketItemTemplate(product, item) {
 				</div>
 				<data class="basket-item-price">${getBasketItemPrice(product, item)}</data>
 			</div>
+		</div>
+	`;
+}
+
+function getEmptyBasketTemplate() {
+	return /*html*/ `
+		<div class="basket-empty">
+			<p>Nothing here yet.<br>Go ahead and choose something delicious!</p>
+			<img src="assets/icons/ic-basket-empty.svg" alt="" />
 		</div>
 	`;
 }
@@ -281,68 +312,11 @@ function renderBadge() {
 	document.getElementById("basket-badge").textContent = count;
 }
 
-// 	if (bookedItem) {
-// 		bookedItem.amount = bookedItem.amount + 1;
-// 	} else {
-// 		basket.push({ id: id, amount: 1 });
-// 	}
+function closeConfirmation() {
+	document.getElementById("confirmation").classList.remove("show");
+}
 
-// const categories = [
-// 	{ name: "burger", ref: "tlist-burger" },
-// 	{ name: "pizza", ref: "list-pizza" },
-// 	{ name: "salad", ref: "list-salad" },
-// ];
 
-// // ------ BASKET ------
-
-// let basket = [];
-
-// // ------ INIT ------
-
-// function init() {
-// 	renderProducts();
-// 	renderBasket();
-// }
-// init();
-
-// // ------ RENDER ------
-
-// function renderProducts() {
-// 	for (let c = 0; c < categories.length; c++) {
-// 		const listRef = document.getElementById(categories[c].ref);
-// 		listRef.innerHTML = "";
-
-// 		for (let i = 0; i < products.length; i++) {
-// 			if (products[i].category === categories[c].name) {
-// 				listRef.innerHTML += getProductTemplate(i);
-// 			}
-// 		}
-// 	}
-// }
-
-// function renderBasketItems(basketRef) {
-// 	for (let i = 0; i < basket.length; i++) {
-// 		const item = basket[i];
-
-// 		const product = products.find(function (p) {
-// 			return p.id === item.id;
-// 		});
-// 		basketRef.innerHTML += getBasketItemTemplate(product, item);
-// 	}
-// }
-
-// function renderBasket() {
-// 	const basketRef = document.getElementById("basket-items");
-// 	basketRef.innerHTML = "";
-
-// 	if (basket.length === 0) {
-// 		basketRef.innerHTML = getEmptyBasketTemplate();
-// 	} else {
-// 		renderBasketItems(basketRef);
-// 	}
-// 	renderInvoice();
-// 	renderBadge();
-// }
 
 // function openBasket() {
 // 	document.getElementById("basket").classList.add("show");
@@ -356,10 +330,6 @@ function renderBadge() {
 // 	basket = [];
 // 	renderBasket();
 // 	document.getElementById("confirmation").classList.add("show");
-// }
-
-// function closeConfirmation() {
-// 	document.getElementById("confirmation").classList.remove("show");
 // }
 
 // function openMenu() {
