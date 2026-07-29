@@ -131,12 +131,15 @@ function renderProducts() {
 
 function renderBasket() {
 	const basketRef = document.getElementById("basket-items");
+	const invoiceRef = document.getElementById("basket-invoice");
 	basketRef.innerHTML = "";
 
 	if (basket.length === 0) {
 		basketRef.innerHTML = getEmptyBasketTemplate();
+		invoiceRef.classList.add("hidden");
 	} else {
 		renderBasketItems(basketRef);
+		invoiceRef.classList.remove("hidden");
 	}
 	renderInvoice();
 	renderBadge();
@@ -228,9 +231,9 @@ function getBasketItemTemplate(product, item) {
 			</div>
 			<div class="basket-item-bottom">
 				<div class="number">
-					<button onclick="counterDownAmount(${item.index})">-</button>
+					<button class="stepper-btn" onclick="counterDownAmount(${item.index})">-</button>
 					<span>${item.amount}</span>
-					<button onclick="counterUpAmount(${item.index})">+</button>
+					<button class="stepper-btn" onclick="counterUpAmount(${item.index})">+</button>
 				</div>
 				<data class="basket-item-price">${getBasketItemPrice(product, item)}</data>
 			</div>
@@ -316,97 +319,12 @@ function closeConfirmation() {
 	document.getElementById("confirmation").classList.remove("show");
 }
 
-
-
-// function openBasket() {
-// 	document.getElementById("basket").classList.add("show");
-// }
-
-// function closeBasket() {
-// 	document.getElementById("basket").classList.remove("show");
-// }
-
-// function checkout() {
-// 	basket = [];
-// 	renderBasket();
-// 	document.getElementById("confirmation").classList.add("show");
-// }
-
-// function openMenu() {
-// 	document.getElementById("header-menu").classList.add("show");
-// 	document.getElementById("menu-backdrop").classList.add("show");
-// }
-
-// function closeMenu() {
-// 	document.getElementById("header-menu").classList.remove("show");
-// 	document.getElementById("menu-backdrop").classList.remove("show");
-// }
-
-function renderBadge() {
-	let count = 0;
-
-	for (let i = 0; i < basket.length; i++) {
-		count = count + basket[i].amount;
-	}
-	document.getElementById("basket-badge").textContent = count;
+function openMenu() {
+	document.getElementById("header-menu").classList.add("show");
+	document.getElementById("menu-backdrop").classList.add("show");
 }
 
-// // ------ TEMPLATES ------
-
-// function getEmptyBasketTemplate() {
-// 	return /*html*/ `
-// 		<div class="basket-empty">
-// 			<p>Nothing here yet.
-// Go ahead and choose something delicious!</p><img src="assets/icons/ic-basket-empty.svg" alt="" />
-// </div>
-// 	`;
-// }
-
-// function getFormattedPrice(price) {
-// 	const fixedPrice = price.toFixed(2);
-// 	const germanPrice = fixedPrice.replace(".", ",");
-// 	return `${germanPrice} €`;
-// }
-
-// function removeFromBasket(id) {
-// 	const index = basket.findIndex(function (item) {
-// 		return item.id === id;
-// 	});
-// 	basket.splice(index, 1);
-// 	renderBasket();
-// }
-
-// function addToBasket(id) {
-// 	const bookedItem = basket.find(function (item) {
-// 		return item.id === id;
-// 	});
-
-// 	if (bookedItem) {
-// 		bookedItem.amount = bookedItem.amount + 1;
-// 	} else {
-// 		basket.push({ id: id, amount: 1 });
-// 	}
-
-// 	renderBasket();
-// }
-
-// function getBasketItemTemplate(product, item) {
-// 	return /*html*/ `
-//         <div class="basket-item">
-// 			<div class="basket-item-top">
-// 				<p class="basket-item-name">${product.name}</p>
-// 				<button onclick="removeFromBasket(${product.id})">
-// 					<img src="assets/icons/ic-trash.svg" alt="Entfernen" />
-// 				</button>
-// 			</div>
-// 			<div class="basket-item-bottom">
-// 				<div class="number">
-// 					<button onclick="counterDownAmount(${product.id})">-</button>
-// 					<span>${item.amount}</span>
-// 					<button onclick="counterUpAmount(${product.id})">+</button>
-// 				</div>
-// 				<data class="basket-item-price">${getBasketItemPrice(product, item)}</data>
-// 			</div>
-// 		</div>
-//     `;
-// }
+function closeMenu() {
+	document.getElementById("header-menu").classList.remove("show");
+	document.getElementById("menu-backdrop").classList.remove("show");
+}

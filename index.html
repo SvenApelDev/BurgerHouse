@@ -13,10 +13,9 @@
 	</head>
 	<body>
 		<header>
-			<div class="content header-content">
+			<div class="header-content">
 				<div class="logo">
 					<img src="assets/icons/ic-logo.svg" alt="" />
-					<span>BurgerHouse</span>
 				</div>
 				<button class="menu-toggle" onclick="openMenu()">
 					<img src="assets/icons/ic-menu.svg" alt="Menü öffnen" />
@@ -30,7 +29,14 @@
 				<a href="#burger" onclick="closeMenu()">Burger</a>
 				<a href="#pizza" onclick="closeMenu()">Pizza</a>
 				<a href="#salad" onclick="closeMenu()">Salad</a>
-				<button onclick="openBasket()">Warenkorb</button>
+				<button
+					onclick="
+						closeMenu();
+						openBasket();
+					"
+				>
+					Warenkorb
+				</button>
 			</nav>
 			<div
 				class="menu-backdrop"
@@ -41,26 +47,43 @@
 
 		<!-- ////// HERO ////// -->
 		<section class="hero">
-			<div class="content hero-content">
-				<img
-					class="hero-image"
-					src="assets/images/hero-image-desktop.jpg"
-					alt=""
-				/>
-				<img
-					class="hero-logo"
-					src="assets/images/logo-badge.png"
-					alt=""
-				/>
+			<div class="hero-content">
+				<div class="hero-image-wrapper">
+					<img
+						class="hero-image-mobile"
+						src="assets/images/hero-image-mobile.jpg"
+						alt=""
+					/>
+					<img
+						class="hero-image-desktop"
+						src="assets/images/hero-image-desktop.jpg"
+						alt=""
+					/>
+					<img
+						class="hero-logo"
+						src="assets/images/logo-badge.png"
+						alt=""
+					/>
+				</div>
 			</div>
 		</section>
-
-		<!-- ////// RESTAURANT-INFO ////// -->
-		<section class="restaurant-info">
-			<div class="content">
-				<h1>BurgerHouse</h1>
-				<p class="rating">★ 4,1 (120)</p>
-				<p class="description">
+		<!-- ////// RESTAURANT-TEASER ////// -->
+		<section class="restaurant-teaser">
+			<div class="content-teaser">
+				<div class="content-rating">
+					<img
+						class="rating-img"
+						src="assets/icons/ic-star.svg"
+						alt=""
+					/>
+					<span class="rating-text-1">4,1</span>
+					<span class="rating-text-2">(317)</span>
+				</div>
+				<h1 class="teaser-title">
+					<span class="burger-title">Burger</span
+					><span class="house-title">House</span>
+				</h1>
+				<p class="teaser-subline">
 					The best of Burgers, Pizza, and Greens, all in one great
 					place.
 				</p>
@@ -72,9 +95,13 @@
 				<!-- Burger -->
 				<section class="category" id="burger">
 					<div class="category-banner">
-						<div class="content">
-							<img src="assets/icons/ic-burger.svg" alt="" />
-							<span>Burger</span>
+						<div class="banner-content">
+							<img
+								class="banner-img"
+								src="assets/icons/ic-burger.svg"
+								alt="Burger Icon"
+							/>
+							<h2 class="banner-title">Burger</h2>
 						</div>
 					</div>
 					<div class="content">
@@ -85,9 +112,15 @@
 				<!-- Pizza -->
 				<section class="category" id="pizza">
 					<div class="category-banner">
-						<div class="content">
-							<img src="assets/icons/ic-pizza.svg" />
-							<span>Pizza</span>
+						<div class="banner-content">
+							<img
+								class="banner-img"
+								src="assets/icons/ic-pizza.svg"
+								alt="Pizza Icon"
+							/>
+							<h2 class="banner-title">
+								Pizza<span class="pizza-subline">(30cm)</span>
+							</h2>
 						</div>
 					</div>
 					<div class="content">
@@ -98,9 +131,13 @@
 				<!-- Salad -->
 				<section class="category" id="salad">
 					<div class="category-banner">
-						<div class="content">
-							<img src="assets/icons/ic-salat.svg" alt="" />
-							<span>Salad</span>
+						<div class="banner-content">
+							<img
+								class="banner-img"
+								src="assets/icons/ic-salad.svg"
+								alt="Pizza Icon"
+							/>
+							<h2 class="banner-title">Salad</h2>
 						</div>
 					</div>
 					<div class="content">
@@ -112,20 +149,20 @@
 			<!-- ////// BASKET ////// -->
 			<aside class="basket" id="basket">
 				<div class="basket-header">
-					<h2>Your Basket</h2>
 					<button class="basket-close" onclick="closeBasket()">
 						<img
 							src="assets/icons/ic-close.svg"
 							alt="Warenkorb schließen"
 						/>
 					</button>
+					<h2>Your Basket</h2>
 				</div>
 
 				<div class="basket-items" id="basket-items">
 					<!-- Warenkorb-Zeilen via JS -->
 				</div>
 
-				<div class="basket-invoice">
+				<div class="basket-invoice" id="basket-invoice">
 					<p class="basket-subtotal">
 						<span>Subtotal</span>
 						<span id="subtotal">0,00 €</span>
@@ -147,11 +184,9 @@
 
 		<!-- ////// FOOTER ////// -->
 		<footer>
-			<div class="content footer-content">
-				<ul class="footer-links">
-					<li>Imprint</li>
-					<li>Cookie Preferences</li>
-				</ul>
+			<div class="footer-content">
+				<p>Imprint</p>
+				<p>Cookie Preferences</p>
 				<p class="copyright">&copy; 2026 BurgerHouse</p>
 			</div>
 		</footer>
@@ -165,9 +200,15 @@
 				<img src="assets/icons/ic-profile.svg" alt="Profil" />
 			</button>
 			<button class="nav-item" onclick="">
-				<img src="assets/icons/ic-menu.svg" alt="Menü" />
+				<img src="assets/icons/ic-orders.svg" alt="Menü" />
 			</button>
-			<button class="nav-item nav-basket" onclick="openBasket()">
+			<button
+				class="nav-item nav-basket"
+				onclick="
+					closeMenu();
+					openBasket();
+				"
+			>
 				<img src="assets/icons/ic-basket.svg" alt="Warenkorb" />
 				<span class="basket-badge" id="basket-badge">0</span>
 			</button>
