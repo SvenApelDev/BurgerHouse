@@ -70,19 +70,21 @@
 		<!-- ////// RESTAURANT-TEASER ////// -->
 		<section class="restaurant-teaser">
 			<div class="content-teaser">
-				<div class="content-rating">
-					<img
-						class="rating-img"
-						src="assets/icons/ic-star.svg"
-						alt=""
-					/>
-					<span class="rating-text-1">4,1</span>
-					<span class="rating-text-2">(317)</span>
+				<div class="titel-rating-container">
+					<div class="content-rating">
+						<img
+							class="rating-img"
+							src="assets/icons/ic-star.svg"
+							alt=""
+						/>
+						<span class="rating-text-1">4,1</span>
+						<span class="rating-text-2">(317)</span>
+					</div>
+					<h1 class="teaser-title">
+						<span class="burger-title">Burger</span
+						><span class="house-title">House</span>
+					</h1>
 				</div>
-				<h1 class="teaser-title">
-					<span class="burger-title">Burger</span
-					><span class="house-title">House</span>
-				</h1>
 				<p class="teaser-subline">
 					The best of Burgers, Pizza, and Greens, all in one great
 					place.
@@ -215,14 +217,20 @@
 		</nav>
 
 		<!-- ////// CONFIRMATION (OVERLAY) ////// -->
-		<div class="confirmation" id="confirmation">
-			<button class="confirm-close" onclick="closeConfirmation()">
-				<img src="assets/icons/ic-close.svg" alt="Schließen" />
-			</button>
-			<img src="assets/images/confirmed.png" alt="" />
-			<div class="confirm-box">
-				<h2>Order confirmed!</h2>
-				<p>Your food is on the way!</p>
+		<div
+			class="confirmation"
+			id="confirmation"
+			onclick="closeConfirmation()"
+		>
+			<div class="confirmation-wrapper">
+				<button class="confirm-close" onclick="closeConfirmation()">
+					<img src="assets/icons/ic-close.svg" alt="Schließen" />
+				</button>
+				<img src="assets/images/confirmed.png" alt="" />
+				<div class="confirm-box">
+					<h2>Order confirmed!</h2>
+					<p>Your food is on the way!</p>
+				</div>
 			</div>
 		</div>
 	</body>

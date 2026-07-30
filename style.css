@@ -85,6 +85,7 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style-type: none;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -94,6 +95,10 @@ body {
     font-weight: 400;
     line-height: 1.2;
     color: #363534;
+}
+
+body.no-scroll {
+    overflow: hidden;
 }
 
 button {
@@ -117,6 +122,8 @@ header {
     background-color: #E76C1F;
 
     .header-content {
+      margin: 0 auto;
+      max-width: 1440px;
       display: flex;
       justify-content: space-between;
 
@@ -186,8 +193,15 @@ header {
     }
   }
 
-  .content-rating {
-    margin-bottom: 16px;
+  .titel-rating-container {
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .content-rating {    
     padding: 5px;
     width: 110px;
     height: 32px;
@@ -218,7 +232,7 @@ header {
   }
 
   .teaser-subline {
-    padding: 11px 11px 0 11px;
+    padding: 0 11px 0 11px;
     font-size: 22px;
     font-weight: 700;
     text-align: center;
@@ -226,6 +240,14 @@ header {
 }
 
 /* ------ MAIN CONTENT ------ */
+
+.menu-layout {
+  max-width: 1440px;
+  margin: 0 auto;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
 
 main {
     background-color: #FFFFFF;
@@ -243,6 +265,8 @@ main {
 }
 
 .banner-content {
+  max-width: 1440px;
+  margin: 0 auto;
   position: relative;
   display: flex;
   justify-content: center;
@@ -315,7 +339,7 @@ footer {
 
 .basket {
   position: fixed;
-  top: 120px;
+  top: 68px;
   left: 0;
   right: 0;
   bottom: 78px;
@@ -341,6 +365,41 @@ footer {
     font-size: 32px;
     font-weight: 700;
     color: #FDEADC;
+  }
+}
+
+.basket-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 57px;
+
+  img {
+    width: 128px;
+    height: 129px;
+  }
+
+  p {
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    color: #FDEADC;
+  }
+
+}
+
+.basket-header {
+  display: flex;
+  flex-direction: column;
+
+  .basket-close {
+    margin-left: auto;
+    padding: 6px 21px 0 0;
+  }
+
+  h2 {
+    margin-bottom: 16px;
+    text-align: center;
   }
 }
 
@@ -377,13 +436,18 @@ footer {
       align-items: center;
       gap: 18px;
 
+      span {
+        line-height: 1;
+      }
+
       .stepper-btn {
         width: 28px;
         height: 28px;
         font-size: 24px;
         font-weight: 600;
         color: #363534;
-        border: 2px solid #363534;
+        background-color: #E76C1F40;
+
         border-radius: 8px;
         line-height: 1;
 
@@ -400,7 +464,7 @@ footer {
 }
 
 .basket-invoice {
-  padding: 14px 0;
+  padding-top: 14px;
   font-size: 20px;
   font-weight: 600;
   display: flex;
@@ -449,7 +513,7 @@ footer {
   height: 78px;
   padding: 24px;
   background-color: #363534;
-  z-index: 50;
+  z-index: 200;
 
   display: flex;
   justify-content: center;
@@ -477,18 +541,44 @@ footer {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #363534;
-
   display: none;
+  align-items: center;
+  justify-content: center;
   z-index: 100;
-
 }
 
 .confirmation.show {
   display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+.confirmation-wrapper {
+  width: 300px;
+  padding: 26px;
   background-color: #363534;
+  color: #FDEADC;
+  border-radius: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+.confirmation-wrapper .confirm-close {
+  align-self: flex-end;
+}
+
+.confirmation-wrapper .confirm-box {
+  text-align: center;
+}
+
+.confirmation-wrapper .confirm-box h2 {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.confirmation-wrapper .confirm-box p {
+  font-size: 22px;
 }
 
 .header-menu {
@@ -524,11 +614,15 @@ footer {
   flex-direction: column;
   gap: 8px;
 
-  img {
+  .card-img-mobile {
     width: 250px;
     height: auto;
     object-fit: cover;
   }
+
+    .card-img-desktop {
+    display: none;
+    }
 }
 
 .product-price-basket {
@@ -581,4 +675,10 @@ footer {
 }
 
 
-
+@media screen and (min-width: 1024px) {
+  .bottom-nav {
+    display: none;
+  }
+  
+  
+}
