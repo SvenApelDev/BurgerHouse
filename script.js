@@ -242,7 +242,7 @@ function getBasketItemTemplate(product, item) {
 		<div class="basket-item">
 			<div class="basket-item-top">
 				<p class="basket-item-name">${product.name}</p>
-				<button onclick="removeFromBasket(${item.index})">
+				<button class="remove-btn" onclick="removeFromBasket(${item.index})">
 					<img src="assets/icons/ic-trash.svg" alt="Entfernen" />
 				</button>
 			</div>
