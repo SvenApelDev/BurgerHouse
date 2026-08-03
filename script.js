@@ -55,27 +55,6 @@ function renderInvoice() {
 		getFormattedPrice(subtotal);
 	document.getElementById("total").textContent = getFormattedPrice(total);
 }
-
-function renderInvoice() {
-	let subtotal = 0;
-
-	for (let i = 0; i < basket.length; i++) {
-		const item = basket[i];
-
-		const product = products.find(function (p) {
-			return p.id === item.id;
-		});
-
-		subtotal = subtotal + product.price * item.amount;
-	}
-
-	const deliveryFee = 4.99;
-	const total = subtotal + deliveryFee;
-	document.getElementById("subtotal").textContent =
-		getFormattedPrice(subtotal);
-	document.getElementById("total").textContent = getFormattedPrice(total);
-}
-
 function renderBasketItems(basketRef) {
 	for (let i = 0; i < basket.length; i++) {
 		const item = basket[i];
@@ -133,10 +112,10 @@ function getBasketItemTemplate(product, item) {
 			<div class="basket-item-bottom">
 				<div class="number">
 					<button class="stepper-btn" onclick="counterDownAmount(${item.index})">-</button>
-					<span>${item.amount}</span>
+					<span id="amount-${item.index}">${item.amount}</span>
 					<button class="stepper-btn" onclick="counterUpAmount(${item.index})">+</button>
 				</div>
-				<data class="basket-item-price">${getBasketItemPrice(product, item)}</data>
+				<data class="basket-item-price" id="price-${item.index}">${getBasketItemPrice(product, item)}</data>
 			</div>
 		</div>
 	`;
@@ -162,6 +141,19 @@ function getFormattedPrice(price) {
 function getBasketItemPrice(product, item) {
 	const totalPrice = product.price * item.amount;
 	return getFormattedPrice(totalPrice);
+}
+
+function updateBasketItem(index) {
+	const item = basket.find(function (i) {
+		return i.index === index;
+	});
+	const product = products[item.index];
+
+	document.getElementById("amount-" + index).textContent = item.amount;
+	document.getElementById("price-" + index).textContent = getBasketItemPrice(product, item);
+
+	renderInvoice();
+	renderBadge();
 }
 
 // ------ ACTIONS ------
@@ -193,7 +185,7 @@ function counterUpAmount(index) {
 		return item.index === index;
 	});
 	bookedItem.amount = bookedItem.amount + 1;
-	renderBasket();
+	updateBasketItem(index);
 }
 
 function counterDownAmount(index) {
@@ -203,8 +195,8 @@ function counterDownAmount(index) {
 
 	if (bookedItem.amount >= 2) {
 		bookedItem.amount = bookedItem.amount - 1;
+		updateBasketItem(index);
 	}
-	renderBasket();
 }
 
 function renderBadge() {
