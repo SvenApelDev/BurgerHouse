@@ -218,13 +218,3 @@ function renderBadge() {
 function closeConfirmation() {
 	document.getElementById("confirmation").classList.remove("show");
 }
-
-function openMenu() {
-	document.getElementById("header-menu").classList.add("show");
-	document.getElementById("menu-backdrop").classList.add("show");
-}
-
-function closeMenu() {
-	document.getElementById("header-menu").classList.remove("show");
-	document.getElementById("menu-backdrop").classList.remove("show");
-}

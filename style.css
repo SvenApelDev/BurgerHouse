@@ -335,7 +335,7 @@ main {
   }
 
   h2 {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     text-align: center;
     color: #FDEADC;
     font-size: 32px;
@@ -371,10 +371,10 @@ main {
 }
 
 .basket-item {
-  padding: 20px;
+  padding: 16px;
   background-color: #FDEADC;
   color: #363534;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   border-radius: 20px;
 
@@ -523,22 +523,6 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* ------ HEADER MENU / BACKDROP ------ */
-
-.header-menu {
-  display: none;
-}
-.header-menu.show {
-  display: flex;
-}
-
-.menu-backdrop {
-  display: none;
-}
-.menu-backdrop.show {
-  display: block;
 }
 
 /* ------ CONFIRMATION ------ */
@@ -711,7 +695,7 @@ footer {
 
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 6px;
   }
 
   .basket-close {
