@@ -1,6 +1,5 @@
-// ------ PRODUCTS DATA ------
-
-let products = [
+//#region Product-Data
+const products = [
 	{
 		name: "Veggie mushroom black burger",
 		description:
@@ -104,11 +103,12 @@ let products = [
 		category: "salad",
 	},
 ];
+//#endregion
 
-// ------ CATEGORIES ------
-
+//#region Categories
 const categories = [
 	{ name: "burger", ref: "list-burger" },
 	{ name: "pizza", ref: "list-pizza" },
 	{ name: "salad", ref: "list-salad" },
 ];
+//#endregion
