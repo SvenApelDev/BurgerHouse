@@ -11,8 +11,10 @@
 			href="./assets/icons/ic-burger.svg"
 			type="image/svg+xml"
 		/>
+		<link rel="stylesheet" href="fonts.css" />
 		<link rel="stylesheet" href="style.css" />
 
+		<script defer src="./data.js"></script>
 		<script defer src="./script.js"></script>
 	</head>
 
@@ -84,7 +86,6 @@
 
 		<!-- ////// MENU (mit schwebendem BASKET) ////// -->
 		<main class="menu">
-			<!-- BASKET-Ebene: height 0, schwebt rechts sticky, überlappt die Banner -->
 			<div class="basket-layer">
 				<div class="content basket-content">
 					<aside class="basket" id="basket">
@@ -101,9 +102,7 @@
 							<h2>Your Basket</h2>
 						</div>
 
-						<div class="basket-items" id="basket-items">
-							<!-- Warenkorb-Zeilen via JS -->
-						</div>
+						<div class="basket-items" id="basket-items"></div>
 
 						<div class="basket-invoice" id="basket-invoice">
 							<p class="basket-subtotal">
@@ -130,7 +129,6 @@
 				</div>
 			</div>
 
-			<!-- Burger -->
 			<section class="category" id="burger">
 				<div class="category-banner">
 					<div class="content banner-content">
@@ -147,7 +145,6 @@
 				</div>
 			</section>
 
-			<!-- Pizza -->
 			<section class="category" id="pizza">
 				<div class="category-banner">
 					<div class="content banner-content">
@@ -166,7 +163,6 @@
 				</div>
 			</section>
 
-			<!-- Salad -->
 			<section class="category" id="salad">
 				<div class="category-banner">
 					<div class="content banner-content">
@@ -205,7 +201,11 @@
 				<img src="assets/icons/ic-orders.svg" alt="Menü" />
 			</button>
 			<button class="nav-item nav-basket" onclick="openBasket()">
-				<img src="assets/icons/ic-basket.svg" alt="Warenkorb" />
+				<img
+					id="basket-icon"
+					src="assets/icons/ic-basket.svg"
+					alt="Warenkorb"
+				/>
 				<span class="basket-badge" id="basket-badge">0</span>
 			</button>
 		</nav>

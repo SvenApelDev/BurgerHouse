@@ -1,68 +1,3 @@
-/* ------ FONTS ------ */
-
-@font-face {
-  font-display: swap;
-  font-family: 'Palanquin Dark';
-  font-style: normal;
-  font-weight: 400;
-  src: url('assets/fonts/palanquin-dark-v17-latin-regular.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'Palanquin Dark';
-  font-style: normal;
-  font-weight: 700;
-  src: url('assets/fonts/palanquin-dark-v17-latin-700.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'Palanquin';
-  font-style: normal;
-  font-weight: 100;
-  src: url('assets/fonts/palanquin-v17-latin-100.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'Palanquin';
-  font-style: normal;
-  font-weight: 200;
-  src: url('assets/fonts/palanquin-v17-latin-200.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'Palanquin';
-  font-style: normal;
-  font-weight: 300;
-  src: url('assets/fonts/palanquin-v17-latin-300.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'Palanquin';
-  font-style: normal;
-  font-weight: 400;
-  src: url('assets/fonts/palanquin-v17-latin-regular.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'Palanquin';
-  font-style: normal;
-  font-weight: 500;
-  src: url('assets/fonts/palanquin-v17-latin-500.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'Palanquin';
-  font-style: normal;
-  font-weight: 600;
-  src: url('assets/fonts/palanquin-v17-latin-600.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'Palanquin';
-  font-style: normal;
-  font-weight: 700;
-  src: url('assets/fonts/palanquin-v17-latin-700.woff2') format('woff2');
-}
 
 /* ------ RESET ------ */
 
@@ -74,6 +9,10 @@
   list-style-type: none;
   scroll-behavior: smooth;
 }
+
+/* ==================================================================
+   MOBILE  (min-width: 320px)
+   ================================================================== */
 
 body {
   padding-bottom: 78px;
@@ -94,41 +33,6 @@ button {
   background: transparent;
   border: none;
   cursor: pointer
-}
-
-  @media (hover: hover) {
-  .add-to-basket:hover {
-    color: #E76C1F;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.10);
-    transform: translateY(1px);
-  }
-}
-
-  @media (hover: hover) {
-  .buy-btn:hover {
-    background-color: #f78036;
-    border: 1px solid #E76C1F;
-    transform: translateY(1px);
-  }
-}
-
-  @media (hover: hover) {
-  .stepper-btn:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.10);
-    transform: translateY(0.5px);
-  }
-}
-
-  @media (hover: hover) {
-  .remove-btn:hover {
-    transform: translateY(1px);
-  }
-}
-
-  @media (hover: hover) {
-  .basket-close:hover {
-    transform: translateY(1px);
-  }
 }
 
 h3 {
@@ -433,6 +337,9 @@ main {
   h2 {
     margin-bottom: 16px;
     text-align: center;
+    color: #FDEADC;
+    font-size: 32px;
+    font-weight: 700;
   }
 }
 
@@ -683,10 +590,35 @@ footer {
 }
 
 /* ==================================================================
-   DESKTOP  (min-width: 1024px)
+   DESKTOP  (min-width: 1300px)
    ================================================================== */
 
 @media screen and (min-width: 1300px) {
+
+  /* ------ HOVER ------ */
+
+  @media (hover: hover) {
+  .add-to-basket:hover {
+    color: #E76C1F;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.10);
+    transform: translateY(1px);
+  }
+  .buy-btn:hover {
+    background-color: #f78036;
+    border: 1px solid #E76C1F;
+    transform: translateY(1px);
+  }
+  .stepper-btn:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.10);
+    transform: translateY(0.5px);
+  }
+  .remove-btn:hover {
+    transform: translateY(1px);
+  }
+  .basket-close:hover {
+    transform: translateY(1px);
+  }
+}
 
   body {
     padding-bottom: 0;
@@ -713,10 +645,6 @@ footer {
     .logo {      
       width: 90px;
       height: auto;
-    }
-
-    .menu-toggle {
-      display: none;
     }
   }
 }
@@ -755,7 +683,6 @@ footer {
     width: 100%;
   }
 
-  /* BASKET-Ebene: height 0, schwebt rechts, sticky */
   .basket-layer {
     height: 0;
     position: sticky;
@@ -777,19 +704,20 @@ footer {
     transition: none;
     inset: auto;
     width: 360px;
-    height: 600px;
+    height: 700px;
     border-radius: 20px 0 0 20px;
     margin: 0;
+    padding-top: 44px;
 
     display: flex;
     flex-direction: column;
+    gap: 24px;
   }
 
   .basket-close {
     display: none;
   }
 
-  /* Produkte weichen dem Basket aus */
   .category .content {
     padding-right: 0;
   }
@@ -821,10 +749,10 @@ footer {
     z-index: 2;
 }
 
-  /* Produkt-Cards horizontal */
   .product-list {
     max-width: 850px;
     position: relative;
+    padding-left: 24px;
     z-index: 1000;
   }
 
