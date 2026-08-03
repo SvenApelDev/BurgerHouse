@@ -1,17 +1,16 @@
 
 let basket = [];
 
-// ------ INIT ------
-
+//#region Init
 function init() {
 	renderProducts();
 	renderBasket();
 }
 
 init();
+//#endregion
 
-// ------ RENDERS ------
-
+//#region Renders
 function renderProducts() {
 	for (let c = 0; c < categories.length; c++) {
 		const listRef = document.getElementById(categories[c].ref);
@@ -55,6 +54,7 @@ function renderInvoice() {
 		getFormattedPrice(subtotal);
 	document.getElementById("total").textContent = getFormattedPrice(total);
 }
+
 function renderBasketItems(basketRef) {
 	for (let i = 0; i < basket.length; i++) {
 		const item = basket[i];
@@ -63,26 +63,24 @@ function renderBasketItems(basketRef) {
 	}
 }
 
-function openBasket() {
-	closeConfirmation();
-	document.getElementById("basket").classList.add("show");
-	document.body.classList.add("no-scroll");
+function renderBadge() {
+	let count = 0;
+
+	for (let i = 0; i < basket.length; i++) {
+		count = count + basket[i].amount;
+	}
+	document.getElementById("basket-badge").textContent = count;
+
+	const basketIcon = document.getElementById("basket-icon");
+	if (basket.length > 0) {
+		basketIcon.src = "assets/icons/ic-basket-active.svg";
+	} else {
+		basketIcon.src = "assets/icons/ic-basket.svg";
+	}
 }
+//#endregion
 
-function closeBasket() {
-	document.getElementById("basket").classList.remove("show");
-	document.body.classList.remove("no-scroll");
-}
-
-function checkout() {
-	basket = [];
-	renderBasket();
-	closeBasket();
-	document.getElementById("confirmation").classList.add("show");
-}
-
-// ------ TEMPLATES ------
-
+//#region Templates
 function getProductTemplate(i) {
 	return /*html*/ `
         <div class="product-card">
@@ -129,9 +127,9 @@ function getEmptyBasketTemplate() {
 		</div>
 	`;
 }
+//#endregion
 
-// ------ HELPERS ------
-
+//#region Helpers
 function getFormattedPrice(price) {
 	const fixedPrice = price.toFixed(2);
 	const germanPrice = fixedPrice.replace(".", ",");
@@ -142,22 +140,9 @@ function getBasketItemPrice(product, item) {
 	const totalPrice = product.price * item.amount;
 	return getFormattedPrice(totalPrice);
 }
+//#endregion
 
-function updateBasketItem(index) {
-	const item = basket.find(function (i) {
-		return i.index === index;
-	});
-	const product = products[item.index];
-
-	document.getElementById("amount-" + index).textContent = item.amount;
-	document.getElementById("price-" + index).textContent = getBasketItemPrice(product, item);
-
-	renderInvoice();
-	renderBadge();
-}
-
-// ------ ACTIONS ------
-
+//#region Actions
 function addToBasket(index) {
 	const bookedItem = basket.find(function (item) {
 		return item.index === index;
@@ -199,22 +184,40 @@ function counterDownAmount(index) {
 	}
 }
 
-function renderBadge() {
-	let count = 0;
+function updateBasketItem(index) {
+	const item = basket.find(function (i) {
+		return i.index === index;
+	});
+	const product = products[item.index];
 
-	for (let i = 0; i < basket.length; i++) {
-		count = count + basket[i].amount;
-	}
-	document.getElementById("basket-badge").textContent = count;
+	document.getElementById("amount-" + index).textContent = item.amount;
+	document.getElementById("price-" + index).textContent = getBasketItemPrice(product, item);
 
-	const basketIcon = document.getElementById("basket-icon");
-	if (basket.length > 0) {
-		basketIcon.src = "assets/icons/ic-basket-active.svg";
-	} else {
-		basketIcon.src = "assets/icons/ic-basket.svg";
-	}
+	renderInvoice();
+	renderBadge();
+}
+//#endregion
+
+//#region Overlays
+function openBasket() {
+	closeConfirmation();
+	document.getElementById("basket").classList.add("show");
+	document.body.classList.add("no-scroll");
+}
+
+function closeBasket() {
+	document.getElementById("basket").classList.remove("show");
+	document.body.classList.remove("no-scroll");
+}
+
+function checkout() {
+	basket = [];
+	renderBasket();
+	closeBasket();
+	document.getElementById("confirmation").classList.add("show");
 }
 
 function closeConfirmation() {
 	document.getElementById("confirmation").classList.remove("show");
 }
+//#endregion
